@@ -1,0 +1,49 @@
+Simple breadboard circuit using Arduino Uno:
+
+   -  A circuit to convert electrical energy to other forms of energy, this time to just turn on the LED.
+   -  This project involves LED, resistor and switch. 
+   -  LED converts electrical energy to light energy.
+   -  Resistor is used to resist flow of electricity and usually used in series with other components to deliver the necessary current needed for the ciruit and block the rest. Without resistor, LED would be too bright for few seconds and then breaks.
+   -  Switch usually used to open/close the ciruit. To interrupt the current flow. 
+   -  We use Arduino IDE to program the arduino board using C. 
+   -  We have the setup and loop function where setup is used to configure and setup the board, loop function is the main function where the required code is written.
+   -  Various commands/primitives needs to be used (like digitalRead/Write to use the digital ports, same for analog).
+   
+   
+Following is the C code to blink the LEDs when the switch is pressed. 
+i.e Turn on LED at port 3 when switch is not pressed and turn on LED 5 and then 4 (after some delay) when the switch is pressed.
+
+
+   int switchstate = 0;
+
+void setup() {
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(2, INPUT);
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  switchstate = digitalRead(2);
+  // put your main code here, to run repeatedly:
+  if (switchstate == LOW) {
+    //button is not presses
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+  }
+  else { 
+    //button is pressed
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(5, HIGH);
+
+    delay(250);
+    //toggle the LEDs
+    digitalWrite(4, HIGH);
+    digitalWrite(5, LOW);
+    delay(250);
+  } 
+}
