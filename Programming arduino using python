@@ -1,0 +1,35 @@
+
+This post is about how to program arduino with python
+
+   Most of the microcontrollers/hardware/development board will have an onboard interpretation language, something which the SDK's/IDE are based on.
+   Ardunio IDE's are mostly C/C++/Java based and is used as a platform for software development to write and upload programs onto arduino board.
+   
+   But if you are someone who is familiar with any other language, mostly python (since we live in a ML/NN era and python is usually the defacto language these days), we have options to write python codes and run it on dev board
+   Note that this can be done with any arduino board using the interface protocol named PYFIRMATA. 
+    
+   Firmata library is a firmata protocol for communication between microcontroller and host computer. This allows you to write custom software without creating our own protocol. To use this protocol with python, we use pyfirmata.
+
+   Before using this, we need to add pyfirmata module to python using
+      pip install pyfirmata
+
+   Now plug the Arduino Uno using the USB-A port to your host computer. Open any text editor, visual studio or xcode and start writing the python code
+  
+   Here is a common example of LED blink using python on Arduino. 
+  
+  ##Importing the libaries before using
+  import pyfirmata
+  from pyfirmata import Arduino, util
+  import time
+
+   ##Specify the connectivity of Arduino Uno with your computer. 
+  board = Arduino("/dev/tty.usb*")
+  
+  ##Specify the number of times LED needs to blink
+  loopTimes = input('How many times would you like the LED to blink: ')
+  print("Blinking " + loopTimes + " times.")
+
+  for x in range(int(loopTimes)):
+        board.digital[13].write(1)
+        time.sleep(0.2)
+        board.digital[13].write(0)
+        time.sleep(0.2)
